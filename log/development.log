@@ -1,0 +1,161 @@
+  [4;36;1mSQL (3.2ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mselect sqlite_version(*)[0m
+  [4;36;1mSQL (4.3ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (12.6ms)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.4ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (3.1ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (3.4ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20081026110108)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.5ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.1ms)[0m   [0;1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "email" varchar(255), "crypted_password" varchar(40), "salt" varchar(40), "created_at" datetime, "updated_at" datetime, "remember_token" varchar(255), "remember_token_expires_at" datetime) [0m
+  [4;35;1mSQL (0.4ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20081026110108')[0m
+Migrating to CreateDatEvents (20081029032544)
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCREATE TABLE "dat_events" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "project_tree_id" integer NOT NULL, "start_date" date, "start_time" time, "end_date" date, "end_time" time, "allday_kbn" integer DEFAULT 1, "place" varchar(100), "content" text, "create_user_id" integer NOT NULL, "created_on" datetime NOT NULL, "update_user_id" integer NOT NULL, "updated_on" datetime NOT NULL, "last_operation_kbn" integer) [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20081029032544')[0m
+Migrating to CreateDatEventusers (20081029032558)
+  [4;36;1mSQL (0.8ms)[0m   [0;1mCREATE TABLE "dat_eventusers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "event_id" integer NOT NULL, "projectuser_id" integer NOT NULL, "entry_flg" integer DEFAULT 0 NOT NULL, "create_user_id" integer NOT NULL, "created_on" datetime NOT NULL) [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20081029032558')[0m
+Migrating to CreateDatMilestones (20081029032614)
+  [4;36;1mSQL (1.1ms)[0m   [0;1mCREATE TABLE "dat_milestones" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "project_tree_id" integer NOT NULL, "mils_date" date, "create_user_id" integer NOT NULL, "created_on" datetime NOT NULL, "update_user_id" integer NOT NULL, "updated_on" datetime NOT NULL, "last_operation_kbn" integer) [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20081029032614')[0m
+Migrating to CreateDatProjectcomps (20081029032701)
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCREATE TABLE "dat_projectcomps" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "project_id" integer NOT NULL, "line_no" integer NOT NULL, "task_kbn" integer NOT NULL, "item_name" varchar(255) NOT NULL, "class_word1" varchar(255), "class_word2" varchar(255), "class_word3" varchar(255), "create_user_id" integer NOT NULL, "created_on" datetime NOT NULL, "update_user_id" integer NOT NULL, "updated_on" datetime NOT NULL, "last_operation_kbn" integer) [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20081029032701')[0m
+Migrating to CreateDatProjectlogs (20081029032716)
+  [4;36;1mSQL (0.9ms)[0m   [0;1mCREATE TABLE "dat_projectlogs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "projectcomp_id" integer NOT NULL, "log_kbn" integer NOT NULL, "create_user_id" integer NOT NULL, "created_on" datetime NOT NULL) [0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20081029032716')[0m
+Migrating to CreateDatProjects (20081029032749)
+  [4;36;1mSQL (1.1ms)[0m   [0;1mCREATE TABLE "dat_projects" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "project_cd" varchar(255) NOT NULL, "project_name" varchar(255) NOT NULL, "start_date" date, "delivery_date" date, "valid_flg" integer DEFAULT 1 NOT NULL, "create_user_id" integer NOT NULL, "created_on" datetime NOT NULL, "update_user_id" integer NOT NULL, "updated_on" datetime NOT NULL, "end_user_name" varchar(255)) [0m
+  [4;35;1mSQL (0.4ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20081029032749')[0m
+Migrating to CreateDatProjectusers (20081029032812)
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCREATE TABLE "dat_projectusers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "project_id" integer NOT NULL, "email" varchar(40) NOT NULL, "user_id" integer, "create_user_id" integer NOT NULL, "created_on" datetime NOT NULL, "active_flg" integer DEFAULT 1) [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20081029032812')[0m
+Migrating to CreateDatTaskhistories (20081029032855)
+  [4;36;1mSQL (0.6ms)[0m   [0;1mCREATE TABLE "dat_taskhistories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "task_id" integer NOT NULL, "msg_code" varchar(20) NOT NULL, "content" text NOT NULL, "report_date" date, "update_user_id" integer NOT NULL, "updated_on" datetime NOT NULL) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20081029032855')[0m
+Migrating to CreateDatTasks (20081029032910)
+  [4;36;1mSQL (0.9ms)[0m   [0;1mCREATE TABLE "dat_tasks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "project_tree_id" integer NOT NULL, "priority_kbn" integer DEFAULT 2 NOT NULL, "plan_power" float DEFAULT 0.0 NOT NULL, "fcas_power" float DEFAULT 0.0, "exp_power" float DEFAULT 0.0, "tani_kbn" integer DEFAULT 2, "client_user_id" integer, "main_user_id" integer, "complete_date" date, "progress_kbn" integer DEFAULT 0, "progress_rate" integer DEFAULT 0, "memo" text, "create_user_id" integer, "created_on" datetime, "update_user_id" integer NOT NULL, "updated_on" datetime NOT NULL, "task_cd" varchar(255), "start_date" date, "end_date" date, "report_date" date, "result" text, "last_operation_kbn" integer) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20081029032910')[0m
+Migrating to CreateDatTaskusers (20081029032924)
+  [4;36;1mSQL (0.6ms)[0m   [0;1mCREATE TABLE "dat_taskusers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "task_id" integer NOT NULL, "projectuser_id" integer NOT NULL, "create_user_id" integer NOT NULL, "created_on" datetime NOT NULL) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20081029032924')[0m
+Migrating to CreateMstCompositions (20081029032936)
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCREATE TABLE "mst_compositions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "template_id" integer NOT NULL, "line_no" integer NOT NULL, "task_kbn" integer NOT NULL, "item_name" varchar(255) NOT NULL, "class_word1" varchar(255), "class_word2" varchar(255), "class_word3" varchar(255), "create_user_id" integer NOT NULL, "created_on" datetime NOT NULL, "update_user_id" integer NOT NULL, "updated_on" datetime NOT NULL) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20081029032936')[0m
+Migrating to CreateMstMessages (20081029032949)
+  [4;36;1mSQL (0.6ms)[0m   [0;1mCREATE TABLE "mst_messages" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "msg_code" varchar(255) NOT NULL, "msg_kbn" integer NOT NULL, "msg_base" text NOT NULL, "msg_jp" text NOT NULL, "msg_cn" text NOT NULL, "msg_en" text NOT NULL, "valid_flg" integer DEFAULT 1 NOT NULL, "create_user_id" integer, "created_on" datetime NOT NULL, "update_user_id" integer, "updated_on" datetime NOT NULL) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20081029032949')[0m
+Migrating to CreateMstTemplates (20081029033004)
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCREATE TABLE "mst_templates" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "type_name" varchar(40), "template_name" varchar(100) NOT NULL, "memo" text, "valid_flg" integer DEFAULT 1 NOT NULL, "create_user_id" integer NOT NULL, "created_on" datetime NOT NULL, "update_user_id" integer NOT NULL, "updated_on" datetime NOT NULL) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20081029033004')[0m
+Migrating to CreateMstTpevents (20081029033021)
+  [4;36;1mSQL (0.6ms)[0m   [0;1mCREATE TABLE "mst_tpevents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "template_tree_id" integer NOT NULL, "place" varchar(100), "content" text, "create_user_id" integer NOT NULL, "created_on" datetime NOT NULL, "update_user_id" integer NOT NULL, "updated_on" datetime NOT NULL) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20081029033021')[0m
+Migrating to CreateMstTpmilestones (20081029033033)
+  [4;36;1mSQL (0.6ms)[0m   [0;1mCREATE TABLE "mst_tpmilestones" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "template_tree_id" integer NOT NULL, "create_user_id" integer NOT NULL, "created_on" datetime NOT NULL, "update_user_id" integer NOT NULL, "updated_on" datetime NOT NULL) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20081029033033')[0m
+Migrating to CreateMstTptasks (20081029033043)
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCREATE TABLE "mst_tptasks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "template_tree_id" integer NOT NULL, "plan_power" float DEFAULT 0.0, "tani_kbn" integer DEFAULT 2, "memo" text, "create_user_id" integer DEFAULT 2 NOT NULL, "created_on" datetime NOT NULL, "update_user_id" integer NOT NULL, "updated_on" datetime NOT NULL) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20081029033043')[0m
+Migrating to CreateMstUsers (20081029033053)
+  [4;36;1mSQL (0.8ms)[0m   [0;1mCREATE TABLE "mst_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login_id" varchar(255), "password" varchar(255) NOT NULL, "user_name" varchar(255) NOT NULL, "email" varchar(255) NOT NULL, "name" varchar(255), "sex" integer, "birthday" date, "company_name" varchar(60), "section_name" varchar(60), "zip" varchar(8), "prefecture" varchar(10), "address1" varchar(100), "address2" varchar(100), "tel" varchar(14), "fax" varchar(14), "start_date" date, "expire_date" date, "valid_flg" integer DEFAULT 1 NOT NULL, "create_user_id" integer, "created_on" datetime NOT NULL, "update_user_id" integer, "updated_on" datetime NOT NULL, "srcpassword" varchar(255), "skype_id" varchar(255), "last_login_on" datetime) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20081029033053')[0m
+Migrating to InsertMstMessages (20081106020257)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20081106020257')[0m
+Migrating to InsertMstCompositions (20081106020355)
+  [4;35;1mSQL (0.3ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20081106020355')[0m
+Migrating to InsertMstTemplates (20081106020412)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20081106020412')[0m
+Migrating to InsertMstTpevents (20081106020430)
+  [4;35;1mSQL (0.3ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20081106020430')[0m
+Migrating to InsertMstTpmilestones (20081106020442)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20081106020442')[0m
+Migrating to InsertMstTptasks (20081106020454)
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20081106020454')[0m
+  [4;36;1mSQL (1.2ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (1.4ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (1.3ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("dat_events")[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("dat_eventusers")[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("dat_milestones")[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("dat_projectcomps")[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("dat_projectlogs")[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mPRAGMA index_list("dat_projects")[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("dat_projectusers")[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("dat_taskhistories")[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("dat_tasks")[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("dat_taskusers")[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("mst_compositions")[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mPRAGMA index_list("mst_messages")[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("mst_templates")[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("mst_tpevents")[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("mst_tpmilestones")[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("mst_tptasks")[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mPRAGMA index_list("mst_users")[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("users")[0m
+
+
+Processing ActionController::Base#show (for 127.0.0.1 at 2009-11-20 00:02:00) [GET]
+
+NameError (uninitialized constant ApplicationController):
+  app/controllers/dashboards_controller.rb:1
+  thin (1.2.2) lib/thin/connection.rb:76:in `pre_process'
+  thin (1.2.2) lib/thin/connection.rb:74:in `catch'
+  thin (1.2.2) lib/thin/connection.rb:74:in `pre_process'
+  thin (1.2.2) lib/thin/connection.rb:57:in `process'
+  thin (1.2.2) lib/thin/connection.rb:42:in `receive_data'
+  eventmachine (0.12.8) lib/eventmachine.rb:242:in `run_machine'
+  eventmachine (0.12.8) lib/eventmachine.rb:242:in `run'
+  thin (1.2.2) lib/thin/backends/base.rb:57:in `start'
+  thin (1.2.2) lib/thin/server.rb:156:in `start'
+  thin (1.2.2) lib/thin/controllers/controller.rb:80:in `start'
+  thin (1.2.2) lib/thin/runner.rb:174:in `send'
+  thin (1.2.2) lib/thin/runner.rb:174:in `run_command'
+  thin (1.2.2) lib/thin/runner.rb:140:in `run!'
+  thin (1.2.2) bin/thin:6
+  /usr/local/bin/thin:19:in `load'
+  /usr/local/bin/thin:19
+
+Rendered rescues/_trace (70.0ms)
+Rendered rescues/_request_and_response (1.9ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing DashboardsController#show (for 127.0.0.1 at 2009-11-20 00:06:57) [GET]
+Redirected to http://0.0.0.0:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 44ms (DB: 0) | 302 Found [http://0.0.0.0/]
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2009-11-20 00:07:03) [GET]
+  [4;36;1mMstMessage Load (24.2ms)[0m   [0;1mSELECT id,msg_code,msg_kbn,msg_jp as msg FROM "mst_messages" WHERE ( valid_flg = 1 ) [0m
+Rendering template within layouts/sessions
+Rendering sessions/new
+Completed in 133ms (View: 78, DB: 24) | 200 OK [http://0.0.0.0/session/new]

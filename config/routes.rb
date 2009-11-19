@@ -1,5 +1,4 @@
 ActionController::Routing::Routes.draw do |map|
-ActionController::AbstractRequest.relative_url_root = ""
 
   map.resource :auth
   map.resources :env, :controller => 'env'
